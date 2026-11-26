@@ -32,3 +32,21 @@ Digital logic design, sequential and combinational circuits, register-based stor
 ## Verification status
 
 The original circuit is preserved in this repository. The architecture description is based on inspection of the saved circuit; instruction-set coverage and execution correctness have not been independently verified. No simulation test results are claimed.
+
+## MIPS assembly exercises
+
+The [`assembly/`](assembly/) directory contains nine original MIPS assembly exercises covering register usage, array indexing, control flow, recursion, stack frames, and function calls.
+
+| File | Intended operation |
+| --- | --- |
+| [`mips1.asm`](assembly/mips1.asm) | Center an array by subtracting its integer mean |
+| [`mips2.asm`](assembly/mips2.asm) | Test inclusive range membership using alternative implementations |
+| [`mips3.asm`](assembly/mips3.asm) | Recursive factorial |
+| [`mips4.asm`](assembly/mips4.asm) | Double array elements in place |
+| [`mips5.asm`](assembly/mips5.asm) | Sum array elements |
+| [`mips6.asm`](assembly/mips6.asm) | Calculate an integer mean using a sum routine |
+| [`mips7.asm`](assembly/mips7.asm) | Remove array elements within a specified range |
+| [`mips8.asm`](assembly/mips8.asm) | Shift array elements left in memory |
+| [`mips9.asm`](assembly/mips9.asm) | Call two functions and divide their results |
+
+These are independent educational source examples, not a verified test suite for the Logisim CPU. Some require helper routines, an entry-point test harness, or corrections before assembly/execution. For example, `mips2.asm` contains two definitions of `between`, and the recursive factorial and array-removal bounds require review. Source files are preserved as submitted; no execution results are claimed.
