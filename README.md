@@ -16,6 +16,7 @@ A digital logic implementation of a MIPS-style CPU datapath built in Logisim-evo
 | File | Description |
 | --- | --- |
 | `mips_cpu.circ` | Original Logisim-evolution circuit design |
+| [`assembly/`](assembly/) | MIPS O32-style calling convention exercises |
 
 ## Getting started
 
@@ -33,9 +34,24 @@ Digital logic design, sequential and combinational circuits, register-based stor
 
 The original circuit is preserved in this repository. The architecture description is based on inspection of the saved circuit; instruction-set coverage and execution correctness have not been independently verified. No simulation test results are claimed.
 
-## MIPS assembly exercises
+## MIPS O32 calling convention exercises
 
-The [`assembly/`](assembly/) directory contains nine original MIPS assembly exercises covering register usage, array indexing, control flow, recursion, stack frames, and function calls.
+The [`assembly/`](assembly/) directory contains nine original MIPS assembly exercises based on the MIPS O32-style calling convention (the 32-bit application binary interface). The primary focus is procedure implementation, register preservation, argument passing, and stack-frame management, alongside array processing and control flow.
+
+### Calling convention concepts
+
+- `$a0`–`$a3`: the first four integer/pointer arguments; additional arguments are passed on the stack.
+- `$v0`–`$v1`: return-value registers.
+- `$t0`–`$t9`: caller-saved temporary registers; preserve any live values across a call as needed.
+- `$s0`–`$s7`: callee-saved registers; a procedure that modifies them must restore their original values.
+- `$sp`: stack pointer; maintain 8-byte alignment and restore it before returning.
+- `$ra`: return address; non-leaf procedures preserve the incoming return address when making nested calls using `jal`, then return using `jr $ra`.
+- O32 outgoing argument area: reserve at least 16 bytes for the four register argument home slots when making calls; stack-passed arguments follow this area.
+- Leaf and non-leaf procedures, recursive calls, stack-frame allocation, and function prologues/epilogues.
+
+For example, `mips7.asm` explicitly separates outgoing arguments, local variables, saved return address, and incoming argument home slots; `mips9.asm` illustrates accessing a fifth argument on the stack and preserving an intermediate result across a nested call. These examples demonstrate the intended convention rather than claiming that every routine has been audited for complete ABI compliance.
+
+Reference: [MIPS O32 calling convention](https://www.dyncall.org/docs/manual/manualse11.html).
 
 | File | Intended operation |
 | --- | --- |
